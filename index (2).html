@@ -137,9 +137,8 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--gris);color:var(--t
 .pub-footer{background:var(--bleu);color:rgba(255,255,255,.7);padding:40px;text-align:center;font-size:.85rem;}
 .pub-footer strong{color:var(--or-clair);}
 
-/* ══════════════════════════════
-   AUTH MODAL
-══════════════════════════════ */
+/*
+   AUTH MODAL */
 .modal-overlay{
   display:none;position:fixed;inset:0;z-index:500;
   background:rgba(15,23,42,.6);backdrop-filter:blur(4px);
@@ -175,9 +174,9 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--gris);color:var(--t
 .error-msg{color:var(--rouge);font-size:.82rem;margin:8px 0;}
 .success-msg{color:var(--vert);font-size:.82rem;margin:8px 0;}
 
-/* ══════════════════════════════
+/* 
    ADMIN PANEL
-══════════════════════════════ */
+ */
 .admin-layout{display:flex;min-height:100vh;}
 .sidebar{
   width:260px;flex-shrink:0;
@@ -285,7 +284,7 @@ textarea:focus{outline:none;border-color:var(--bleu-clair);}
 </head>
 <body>
 
-<!-- ═══════════════════ SITE PUBLIC ═══════════════════ -->
+<!--  SITE PUBLIC -->
 <div id="screen-public" class="screen active">
   <header class="pub-header">
     <div class="pub-header-inner">
@@ -354,7 +353,7 @@ textarea:focus{outline:none;border-color:var(--bleu-clair);}
   </footer>
 </div>
 
-<!-- ═══════════════════ AUTH MODAL ═══════════════════ -->
+<!--  AUTH MODA -->
 <div class="modal-overlay" id="auth-modal">
   <div class="modal">
     <button class="modal-close" onclick="closeAuthModal()">✕</button>
@@ -383,7 +382,7 @@ textarea:focus{outline:none;border-color:var(--bleu-clair);}
   </div>
 </div>
 
-<!-- ═══════════════════ ADMIN LOGIN ═══════════════════ -->
+<!--  ADMIN LOGIN  -->
 <div id="screen-admin-login" class="screen">
   <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bleu),#1e4fa0);">
     <div class="modal" style="max-width:400px;">
@@ -404,7 +403,7 @@ textarea:focus{outline:none;border-color:var(--bleu-clair);}
   </div>
 </div>
 
-<!-- ═══════════════════ ADMIN PANEL ═══════════════════ -->
+<!--  ADMIN PANEL  -->
 <div id="screen-admin" class="screen">
   <div class="admin-layout">
     <!-- Sidebar -->
@@ -447,9 +446,7 @@ textarea:focus{outline:none;border-color:var(--bleu-clair);}
 </div>
 
 <script>
-// ══════════════════════════════════════
 // STORAGE HELPERS
-// ══════════════════════════════════════
 const DB = {
   get:(k,d=[])=>JSON.parse(localStorage.getItem('mairie_'+k)||JSON.stringify(d)),
   set:(k,v)=>localStorage.setItem('mairie_'+k,JSON.stringify(v)),
@@ -477,18 +474,14 @@ function initDB() {
   }
 }
 
-// ══════════════════════════════════════
 // SCREEN NAV
-// ══════════════════════════════════════
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if(id==='screen-public') renderPublic();
 }
 
-// ══════════════════════════════════════
 // PUBLIC SITE
-// ══════════════════════════════════════
 function renderPublic(){
   const cfg   = DB.get('config',{cityName:'Mairie'});
   const svcs  = DB.get('services');
@@ -539,9 +532,7 @@ function renderPublic(){
 
 function pubScroll(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
 
-// ══════════════════════════════════════
 // AUTH CITOYEN
-// ══════════════════════════════════════
 function openAuthModal(){document.getElementById('auth-modal').classList.add('show');}
 function closeAuthModal(){document.getElementById('auth-modal').classList.remove('show');}
 function switchAuthTab(t){
@@ -591,9 +582,7 @@ function logoutCitoyen(){
   document.getElementById('citoyen-bar').style.display='none';
 }
 
-// ══════════════════════════════════════
 // ADMIN AUTH
-// ══════════════════════════════════════
 function showAdmin(){showScreen('screen-admin-login');}
 
 function adminLogin(){
@@ -611,9 +600,7 @@ function adminLogin(){
 
 function adminLogout(){showScreen('screen-public');}
 
-// ══════════════════════════════════════
 // ADMIN TABS
-// ══════════════════════════════════════
 function adminTab(tab){
   document.querySelectorAll('.sidebar-nav a').forEach(a=>a.classList.remove('active'));
   const el=document.getElementById('nav-'+tab);
@@ -834,9 +821,8 @@ function deleteItem(collection,id){
   if(fn[collection]) fn[collection]();
 }
 
-// ══════════════════════════════════════
 // INIT
-// ══════════════════════════════════════
+
 window.onload=()=>{
   initDB();
   // Restore citoyen session
